@@ -1,4 +1,3 @@
-import pdb
 
 def is_stackable(total_size, num_stacks):
     """Checks if the boxes are capable of being stacked evenly
@@ -16,7 +15,6 @@ def is_stackable(total_size, num_stacks):
     else:
 
         return False
-
 
 def parse(stack_info):
     """Parses the string to find stack size and number of stacks to make
@@ -45,32 +43,49 @@ def stack_boxes(total_size, num_stacks, boxes):
         boxes      (str): list of all the sizes of boxes
 
     Returns:
-        None (TBD?)
+        bool: Returns True for success. False, otherwise.
     """
+    # Create a list of integers for size of boxes with ascending order
+    boxes = list(boxes)
+    boxes = [int(box) for box in boxes]
+    boxes.sort(reverse=True)
 
-    group_size = int(total_size / num_stacks)
-    sum = 0
-    diff = group_size
-    stack = ""
+    # Go through one less than the amount of stacks needed
+    # Because leftovers will be equal to the group size
+    for number in range(0, num_stacks-1):
 
+        # Reset the group size and the items in the stack
+        group_size = int(total_size / num_stacks)
+        stack = []
+
+        for box in boxes:
+
+            # Check if the boxes can fit, if so remove from boxes into stack
+            if box <= group_size:
+
+                stack.append(box)
+                boxes.remove(box)
+                group_size -= box
+
+        print(stack)
+
+
+    # The leftovers in the box will equal the group size
+    print(boxes)
+
+    return True
 
 # String containing the the amount of stacks and all the size of each box
-string = "3 34312332"
+string = "4 064876318535318"
 
 total_size, num_stacks, boxes = parse(string)
-
-print("\nstack #: {}".format(num_stacks))
-print("total stack: {}".format(total_size))
 
 # Check if we can make x amount of stacks evenly
 if is_stackable(total_size, num_stacks):
 
-    print("\nIt's stackable")
     stack_boxes(total_size, num_stacks, boxes)
 
 else:
 
-    print("\nnot stackable")
-
-print("\n")
+    print("\nThe boxes cannot be stacked evenly")
 
