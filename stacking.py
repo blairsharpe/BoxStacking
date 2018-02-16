@@ -1,5 +1,6 @@
 import pdb
 
+
 def is_stackable(total_size, num_stacks):
     """Checks if the boxes are capable of being stacked evenly
 
@@ -16,7 +17,6 @@ def is_stackable(total_size, num_stacks):
     else:
 
         return False
-
 
 def parse(stack_info):
     """Parses the string to find stack size and number of stacks to make
@@ -47,15 +47,31 @@ def stack_boxes(total_size, num_stacks, boxes):
     Returns:
         None (TBD?)
     """
+    boxes = list(boxes)
+    boxes = [int(box) for box in boxes]
+    boxes.sort(reverse=True)
 
-    group_size = int(total_size / num_stacks)
-    sum = 0
-    diff = group_size
-    stack = ""
+    for number in range(0, num_stacks-1):
 
+        group_size = int(total_size / num_stacks)
+        stack = []
+
+        for box in boxes:
+
+            if box <= group_size:
+
+                stack.append(box)
+                boxes.remove(box)
+                group_size -= box
+
+        print(stack)
+
+    print(boxes)
+
+    return True
 
 # String containing the the amount of stacks and all the size of each box
-string = "3 34312332"
+string = "4 064876318535318"
 
 total_size, num_stacks, boxes = parse(string)
 
