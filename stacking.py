@@ -1,5 +1,4 @@
 
-
 def is_stackable(total_size, num_stacks):
     """Checks if the boxes are capable of being stacked evenly
 
@@ -46,41 +45,21 @@ def stack_boxes(total_size, num_stacks, boxes):
     Returns:
         bool: Returns True for success. False, otherwise.
     """
-<<<<<<< HEAD
-=======
     # Create a list of integers for size of boxes with ascending order
->>>>>>> develop
     boxes = list(boxes)
     boxes = [int(box) for box in boxes]
     boxes.sort(reverse=True)
 
-<<<<<<< HEAD
-    for number in range(0, num_stacks-1):
-
-=======
     # Go through one less than the amount of stacks needed
     # Because leftovers will be equal to the group size
     for number in range(0, num_stacks-1):
 
         # Reset the group size and the items in the stack
->>>>>>> develop
         group_size = int(total_size / num_stacks)
         stack = []
 
         for box in boxes:
 
-<<<<<<< HEAD
-            if box <= group_size:
-
-                stack.append(box)
-                boxes.remove(box)
-                group_size -= box
-
-        print(stack)
-
-    print(boxes)
-
-=======
             # Check if the boxes can fit, if so remove from boxes into stack
             if box <= group_size:
 
@@ -94,7 +73,6 @@ def stack_boxes(total_size, num_stacks, boxes):
     # The leftovers in the box will equal the group size
     print(boxes)
 
->>>>>>> develop
     return True
 
 # String containing the the amount of stacks and all the size of each box
